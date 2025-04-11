@@ -1,0 +1,81 @@
+Table fact_crime_incident {
+  DR_NO varchar [pk]                 // Unique incident ID
+  DATE_KEY date                      // FK to dim_date
+  TIME_OCC int
+  AREA_KEY int                       // FK to dim_area
+  CRM_CD_KEY int                     // FK to dim_crime_code
+  LOCATION_KEY int                   // FK to dim_location
+  VICTIM_KEY int                     // FK to dim_victim
+  PREMIS_KEY int                     // FK to dim_premises
+  WEAPON_KEY int                     // FK to dim_weapon
+  STATUS_KEY int                     // FK to dim_status
+}
+
+Table dim_date {
+  DATE_KEY date [pk]
+  FULL_DATE date
+  YEAR int
+  MONTH int
+  DAY int
+  WEEKDAY varchar
+  IS_WEEKEND boolean
+}
+
+Table dim_area {
+  AREA_KEY int [pk]
+  AREA int
+  AREA_NAME varchar
+}
+
+Table dim_crime_code {
+  CRM_CD_KEY int [pk]
+  CRM_CD int
+  CRM_CD_DESC varchar
+  PART_1_2 varchar
+  CRM_CD_1 int
+  CRM_CD_2 int
+  CRM_CD_3 int
+  CRM_CD_4 int
+}
+
+Table dim_location {
+  LOCATION_KEY int [pk]
+  LOCATION varchar
+  CROSS_STREET varchar
+  LAT float
+  LON float
+}
+
+Table dim_victim {
+  VICTIM_KEY int [pk]
+  VICT_AGE int
+  VICT_SEX varchar
+  VICT_DESCENT varchar
+}
+
+Table dim_premises {
+  PREMIS_KEY int [pk]
+  PREMIS_CD int
+  PREMIS_DESC varchar
+}
+
+Table dim_weapon {
+  WEAPON_KEY int [pk]
+  WEAPON_USED_CD int
+  WEAPON_DESC varchar
+}
+
+Table dim_status {
+  STATUS_KEY int [pk]
+  STATUS varchar
+  STATUS_DESC varchar
+}
+
+Ref: fact_crime_incident.DATE_KEY > dim_date.DATE_KEY
+Ref: fact_crime_incident.AREA_KEY > dim_area.AREA_KEY
+Ref: fact_crime_incident.CRM_CD_KEY > dim_crime_code.CRM_CD_KEY
+Ref: fact_crime_incident.LOCATION_KEY > dim_location.LOCATION_KEY
+Ref: fact_crime_incident.VICTIM_KEY > dim_victim.VICTIM_KEY
+Ref: fact_crime_incident.PREMIS_KEY > dim_premises.PREMIS_KEY
+Ref: fact_crime_incident.WEAPON_KEY > dim_weapon.WEAPON_KEY
+Ref: fact_crime_incident.STATUS_KEY > dim_status.STATUS_KEY
