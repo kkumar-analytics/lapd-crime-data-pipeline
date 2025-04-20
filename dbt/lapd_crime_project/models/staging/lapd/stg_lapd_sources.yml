@@ -1,0 +1,83 @@
+version: 2
+
+sources:
+  - name: raw
+    database: lapd_crime_data
+    schema: raw
+    tables:
+      - name: raw_lapd_crime_data
+        description: "Raw LAPD crime data loaded from CSV"
+        loaded_at_field: DL_UPD
+        freshness:
+          warn_after: { count: 24, period: hour }
+          error_after: { count: 48, period: hour }
+        columns:
+          - name: DR_NO
+            description: "Division of Records Number: Official file number made up of a 2 digit year, area ID, and 5 digits"
+            tests:
+              - unique
+              - not_null
+          - name: DATE_RPTD
+            description: "Date of report"
+            tests:
+              - not_null
+          - name: DATE_OCC
+            description: "Date of occurrence"
+            tests:
+              - not_null
+          - name: TIME_OCC
+            description: "Time of occurrence"
+            tests:
+              - not_null
+          - name: AREA
+            description: "The LAPD has 21 Community Police Stations referred to as Geographic Areas within the department. These Geographic Areas are sequentially numbered from 1-21."
+            tests:
+              - not_null
+          - name: AREA_NAME
+            description: "The 21 Geographic Areas or Patrol Divisions are also given a name designation that references a landmark or the surrounding community that it is responsible for."
+          - name: RPT_DIST_NO
+            description: "A four-digit code that represents a sub-area within a Geographic Area. All crime records reference the RD that it occurred in for statistical comparisons. "
+          - name: PART_1_2
+            description: "Part of crime (Part 1 or 2)"
+          - name: CRM_CD
+            description: "Indicates the crime committed."
+          - name: CRM_CD_DESC
+            description: "Defines the Crime Code provided."
+          - name: MOCODES
+            description: "Modus Operandi: Activities associated with the suspect in commission of the crime"
+          - name: VICT_AGE
+            description: "Victim's age"
+          - name: VICT_SEX
+            description: "Victim's sex- F-Female M-Male X-Unknown"
+          - name: VICT_DESCENT
+            description: "Descent Code: A - Other Asian B - Black C - Chinese D - Cambodian F - Filipino G - Guamanian H - Hispanic/Latin/Mexican I - American Indian/Alaskan Native J - Japanese K - Korean L - Laotian O - Other P - Pacific Islander S - Samoan U - Hawaiian V - Vietnamese W - White X - Unknown Z - Asian Indian"
+          - name: PREMIS_CD
+            description: "The type of structure, vehicle, or location where the crime took place."
+          - name: PREMIS_DESC
+            description: "Defines the Premise Code provided."
+          - name: WEAPON_USED_CD
+            description: "The type of weapon used in the crime."
+          - name: WEAPON_DESC
+            description: "Weapon description"
+          - name: STATUS
+            description: "Status of the case. (IC is the default)"
+          - name: STATUS_DESC
+            description: "Defines the Status Code provided."
+          - name: CRM_CD_1
+            description: "Indicates the crime committed. Crime Code 1 is the primary and most serious one. Crime Code 2, 3, and 4 are respectively less serious offenses. Lower crime class numbers are more serious."
+          - name: CRM_CD_2
+            description: "May contain a code for an additional crime, less serious than Crime Code 1"
+          - name: CRM_CD_3
+            description: "May contain a code for an additional crime, less serious than Crime Code 1"
+          - name: CRM_CD_4
+            description: "May contain a code for an additional crime, less serious than Crime Code 1"
+          - name: LOCATION
+            description: "Street address of crime incident rounded to the nearest hundred block to maintain anonymity."
+          - name: CROSS_STREET
+            description: "Cross Street of rounded Address"
+          - name: LAT
+            description: "Latitude"
+          - name: LON
+            description: "Longitude"
+          - name: DL_UPD
+            description: "Data load update timestamp"
