@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "This table contains the date dimension, providing attributes like year, month, day, and quarter."
+    columns:
+      - name: id
+        description: "A sequential identifier for each date."
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+        description: "The full date in YYYY-MM-DD format."
+        tests:
+          - not_null
+      - name: year
+        description: "The year extracted from the date."
+        tests:
+          - not_null
+      - name: month
+        description: "The month extracted from the date."
+        tests:
+          - not_null
+      - name: month_name
+        description: "The full name of the month (e.g., January, February)."
+        tests:
+          - not_null
+      - name: day
+        description: "The day of the month."
+        tests:
+          - not_null
+      - name: day_of_week
+        description: "The day of the week, where 0 is Sunday, 6 is Saturday."
+        tests:
+          - not_null
+      - name: day_name
+        description: "The name of the day (e.g., Monday, Tuesday)."
+        tests:
+          - not_null
+      - name: week_of_year
+        description: "The week number in the year."
+        tests:
+          - not_null
+      - name: quarter
+        description: "The quarter of the year (1, 2, 3, 4)."
+        tests:
+          - not_null
+      - name: is_weekend
+        description: "Indicates whether the date is on a weekend (True for Saturday/Sunday)."
+        tests:
+          - not_null
+      - name: doe
+        description: "The date when the record was inserted or updated in the table."
+        tests:
+          - not_null
+      - name: dlu
+        description: "The last date when the record was updated."
+        tests:
+          - not_null

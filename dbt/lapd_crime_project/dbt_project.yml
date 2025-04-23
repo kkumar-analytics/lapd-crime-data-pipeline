@@ -31,3 +31,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   lapd_crime_project:
+    marts:
+      core:
+        +schema: mart_core
