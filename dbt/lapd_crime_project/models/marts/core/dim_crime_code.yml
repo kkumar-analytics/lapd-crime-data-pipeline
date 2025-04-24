@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_crime_code
+    description: "Dimension table for crime codes with descriptions and last updated timestamp."
+    columns:
+      - name: id
+        description: "Surrogate key generated from the crime code."
+        tests:
+          - unique
+          - not_null
+
+      - name: code
+        description: "The unique business key representing a crime type."
+        tests:
+          - not_null
+
+      - name: description
+        description: "Detailed description of the crime code."
+        tests:
+          - not_null
+
+      - name: source_dlu
+        description: "The timestamp from source system indicating last update of this code."
+
+      - name: dlu
+        description: "Timestamp when this record was last updated in the data warehouse."
+        tests:
+          - not_null

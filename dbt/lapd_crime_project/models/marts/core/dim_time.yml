@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_time
+    description: "Time dimension table with hour, minute, and part_of_day."
+    columns:
+      - name: id
+        description: "Unique identifier for each time entry (hour and minute)."
+        tests:
+          - unique
+          - not_null
+      - name: hour_of_day
+        description: "Hour of the day (0-23)."
+        tests:
+          - not_null
+      - name: minute_of_hour
+        description: "Minute within the hour (0-59)."
+        tests:
+          - not_null
+      - name: part_of_day
+        description: "Categorizes the part of the day (Night, Morning, Afternoon, Evening)."
+        tests:
+          - not_null
+      - name: doe
+        description: "Date of entry (timestamp when the row was created)."
+        tests:
+          - not_null
