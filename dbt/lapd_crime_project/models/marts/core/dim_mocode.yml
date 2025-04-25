@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_mocode
+    description: "Dimension table for Modus Operandi (MO) codes"
+    columns:
+      - name: id
+        description: "Surrogate key for mocode"
+        tests: [unique, not_null]
+      - name: code
+        description: "MOCODES value from source"
+        tests: [unique, not_null]
+      - name: description
+        description: "Description of the MO code"
+        tests: [not_null]
+      - name: dlu
+        description: "Date/time last loaded"
