@@ -6,8 +6,8 @@ with source as (
 )
 select
     cast(dr_no as int) as dr_no,
-    date_rptd,
-    date_occ,
+    TO_DATE(date_rptd, 'MM/DD/YYYY HH:MI:SS AM') AS date_rptd,
+    TO_DATE(date_occ, 'MM/DD/YYYY HH:MI:SS AM') AS date_occ,
     to_time(lpad(cast(time_occ as string), 4, '0'), 'HH24MI') as time_occ,
     cast(area as integer) as area,
     area_name,
