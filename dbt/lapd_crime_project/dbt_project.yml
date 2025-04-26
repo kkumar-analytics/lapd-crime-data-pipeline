@@ -34,3 +34,10 @@ models:
     marts:
       core:
         +schema: mart_core
+
+seeds:
+  lapd_crime_project:
+    mocodes:
+      +column_types:
+        mocodes: integer
+        description: string
