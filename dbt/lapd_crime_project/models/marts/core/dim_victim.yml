@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: dim_victim
+    description: "Dimension table containing victim demographic attributes from LAPD crime dataset, managed as an SCD Type 2 table with incremental loads based on last update timestamp."
+    config:
+      materialized: incremental
+      schema: mart_core
+    columns:
+      - name: id
+        description: "Surrogate key generated from age, sex, and descent."
+        tests:
+          - not_null
+          - unique
+      - name: age
+        description: "Age of the victim at the time of the incident."
+      - name: sex
+        description: "Sex of the victim (M/F/X/N/U)."
+      - name: descent
+        description: "Descent (race/ethnicity) code of the victim."
+      - name: source_dlu
+        description: "Last updated timestamp from the source staging table (dl_upd)."
+      - name: dlu
+        description: "Timestamp when the record was last loaded/updated in the data warehouse."

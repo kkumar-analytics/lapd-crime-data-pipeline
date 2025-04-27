@@ -1,0 +1,29 @@
+version: 2
+
+snapshots:
+  - name: dim_location
+    description: "Snapshot for tracking historical changes to location details (SCD Type 2)."
+    columns:
+      - name: id
+        description: "Surrogate key generated from location, cross_street, lat, and lon."
+        tests:
+          - not_null
+          - unique
+
+      - name: location
+        description: "Location (street address or coordinates) where the crime occurred."
+
+      - name: cross_street
+        description: "Nearest cross street to the location."
+
+      - name: lat
+        description: "Latitude coordinate of the location."
+
+      - name: lon
+        description: "Longitude coordinate of the location."
+
+      - name: source_dlu
+        description: "Last updated datetime from the source staging table."
+
+      - name: dlu
+        description: "Datetime when the record was loaded into the snapshot."

@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_area
+    description: "Dimension table for LAPD areas (police divisions). Loaded with full refresh."
+    columns:
+      - name: id
+        description: "Surrogate key generated from area code."
+        tests:
+          - not_null
+          - unique
+
+      - name: code
+        description: "Area code representing the LAPD police division."
+        tests:
+          - not_null
+
+      - name: name
+        description: "Area name (police division name)."
+        tests:
+          - not_null
+
+      - name: source_dlu
+        description: "Last updated datetime from the source staging table."
+
+      - name: dlu
+        description: "Datetime when the record was loaded into the dimension table."

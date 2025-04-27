@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_status
+    description: "Lookup table for status codes used in LAPD crime data."
+    columns:
+      - name: id
+        description: "Surrogate key generated from status."
+        tests:
+          - not_null
+          - unique
+
+      - name: code
+        description: "Status code from source data."
+        tests:
+          - not_null
+
+      - name: description
+        description: "Description of the status."
+
+      - name: source_dlu
+        description: "DL_UPD from the source to capture last update timestamp."
+
+      - name: dlu
+        description: "Timestamp of when the record was loaded into the dimension."

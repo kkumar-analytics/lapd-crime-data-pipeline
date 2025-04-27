@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: dim_premise
+    description: "Dimension table for LAPD premises (types of locations of crimes)."
+    columns:
+      - name: id
+        description: "Surrogate key generated from premise code."
+        tests:
+          - not_null
+          - unique
+
+      - name: code
+        description: "Premise code representing the type of location."
+
+      - name: description
+        description: "Description of the premise type."
+
+      - name: source_dlu
+        description: "Last updated datetime from the source staging table."
+
+      - name: dlu
+        description: "Datetime when the record was loaded into the dimension table."

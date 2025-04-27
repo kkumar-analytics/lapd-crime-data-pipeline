@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_weapon
+    description: "Lookup table for weapon codes used in LAPD crime data."
+    columns:
+      - name: id
+        description: "Surrogate key generated from weapon code."
+        tests:
+          - not_null
+          - unique
+
+      - name: code
+        description: "Weapon code from source data."
+        tests:
+          - not_null
+
+      - name: description
+        description: "Description of the weapon."
+
+      - name: source_dlu
+        description: "DL_UPD from the source to capture last update timestamp."
+
+      - name: dlu
+        description: "Timestamp of when the record was loaded into the dimension."
