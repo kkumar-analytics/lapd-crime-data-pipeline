@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: bridge_crime_code
+    description: "Bridge table connecting crime events (dr_no) to multiple crime codes."
+    columns:
+      - name: dr_no
+        description: "Incident report number."
+      - name: crime_code_dim_id
+        description: "Dimension ID for crime code."
+      - name: doe
+        description: "Date of entry (when first inserted)."
+      - name: dlu
+        description: "Date last updated (when record was updated)."
