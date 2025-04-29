@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: bridge_mocode
+    description: |
+      Bridge table linking crime report (DR_NO) to associated MOCODEs.
+      One row per (DR_NO, MOCODE_DIM_ID) pair.
+    config:
+      schema: mart_core
+    columns:
+      - name: dr_no
+        description: Unique identifier for the crime report.
+        tests:
+          - not_null
+      - name: mocode_dim_id
+        description: Foreign key to dim_mocode table representing the MOCODE.
+        tests:
+          - not_null
+      - name: doe
+        description: Date of entry - when this record first appeared in the bridge.
+      - name: dlu
+        description: Date of last update - when this record was last updated.
