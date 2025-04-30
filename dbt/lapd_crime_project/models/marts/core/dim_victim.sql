@@ -28,9 +28,9 @@ descent_mapping AS (
 victim_data as (
 SELECT
     distinct
-    coalesce(vict_age,0) AS age,
-    coalesce(vict_sex, 'UNKNOWN') AS sex,
-    coalesce(dm.descent_description, 'UNKNOWN') AS descent,
+    vict_age AS age,
+    vict_sex AS sex,
+    dm.descent_description AS descent,
     source_dlu,
     CURRENT_TIMESTAMP AS dlu
 FROM source_victim sv
