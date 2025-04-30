@@ -19,21 +19,29 @@ WITH source_victim AS (
     WHERE dl_upd > (SELECT MAX(source_dlu) FROM {{ this }})
     {% endif %}
 ),
-
 descent_mapping AS (
     SELECT
         descent_code,
         descent_description
     FROM {{ ref('descent_mapping') }}
-)
-
+),
+victim_data as (
 SELECT
-    {{ dbt_utils.generate_surrogate_key(['vict_age', 'vict_sex', 'vict_descent']) }} AS id,
-    vict_age AS age,
-    vict_sex AS sex,
-    dm.descent_description AS descent,
+    distinct
+    coalesce(vict_age,0) AS age,
+    coalesce(vict_sex, 'UNKNOWN') AS sex,
+    coalesce(dm.descent_description, 'UNKNOWN') AS descent,
     source_dlu,
     CURRENT_TIMESTAMP AS dlu
 FROM source_victim sv
 LEFT JOIN descent_mapping dm
     ON sv.vict_descent = dm.descent_code
+)
+SELECT
+    {{ dbt_utils.generate_surrogate_key(['age','sex','descent']) }} AS id,
+    age,
+    sex,
+    descent,
+    source_dlu,
+    dlu
+FROM victim_data
