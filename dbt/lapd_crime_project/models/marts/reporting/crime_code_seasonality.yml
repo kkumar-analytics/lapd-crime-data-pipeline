@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: crime_code_seasonality
+    description: Shows the monthly seasonality trends of different crime types. Helps identify which crime types peak during certain months.
+    columns:
+      - name: crime_code
+        description: Numeric code representing the type of crime.
+      - name: crime_description
+        description: Description of the crime type.
+      - name: month
+        description: Month name (e.g., January, February).
+      - name: month_number
+        description: Numeric month value (1-12) for ordering.
+      - name: crime_count
+        description: Number of crimes of this type reported in the month.
+      - name: total_by_crime
+        description: Total number of crimes for the crime type across all months.
+      - name: month_percentage
+        description: Percentage share of crime type that occurred in this month.

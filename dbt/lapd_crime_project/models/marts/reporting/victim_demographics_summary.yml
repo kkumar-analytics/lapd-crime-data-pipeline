@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: victim_demographics_summary
+    description: Summarizes crime incidents by victim demographics including age, sex, and descent.
+      Calculates the share of each descent category within each age-sex group.
+    columns:
+      - name: victim_age
+        description: Age of the victim.
+      - name: victim_sex
+        description: Sex of the victim (M/F/Other).
+      - name: victim_descent
+        description: Ethnic or racial background of the victim (mapped from descent codes).
+      - name: incident_count
+        description: Total number of incidents involving victims in this demographic group.
+      - name: total_by_age_sex
+        description: Total number of incidents for the given age and sex group.
+      - name: descent_percentage
+        description: Percentage share of each descent within the age-sex group.

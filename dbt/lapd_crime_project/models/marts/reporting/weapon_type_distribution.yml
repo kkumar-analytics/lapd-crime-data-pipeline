@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: weapon_type_distribution
+    description: Aggregates the distribution of weapon types used in crimes across different LAPD areas and parts of the day. 
+      Includes total counts and percentage contribution of each weapon type per area and time window.
+    columns:
+      - name: area_name
+        description: Name of the LAPD reporting district/area.
+      - name: part_of_day
+        description: Time window classification such as Morning, Afternoon, Evening, Night.
+      - name: weapon_type
+        description: Type or description of the weapon used in the incident.
+      - name: weapon_count
+        description: Number of crimes reported involving this weapon type.
+      - name: total_crimes
+        description: Total number of crimes reported in that area and time window.
+      - name: weapon_type_percentage
+        description: Percentage of total crimes in that group where this weapon was used.

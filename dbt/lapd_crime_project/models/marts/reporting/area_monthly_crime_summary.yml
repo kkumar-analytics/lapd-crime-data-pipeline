@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: area_monthly_crime_summary
+    description: Monthly summary of reported LAPD crimes by area. Aggregates event-level facts
+      using area and occurrence date dimensions.
+    columns:
+      - name: area_code
+        description: "The LAPD reporting area code."
+      - name: area_name
+        description: "The name of the LAPD area."
+      - name: year
+        description: "The year when the crime occurred."
+      - name: month
+        description: "The month when the crime occurred."
+      - name: crime_count
+        description: "The number of crimes reported in that area and month."
+      - name: dlu
+        description: "The timestamp when the summary row was last updated."

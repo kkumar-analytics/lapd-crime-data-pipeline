@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: location_crime_density
+    description: Aggregates number of crimes by latitude/longitude buckets with detailed breakdowns by crime type, time, and date.
+    columns:
+      - name: lat_bucket
+        description: Latitude rounded to 3 decimal places (~111 meters).
+      - name: lon_bucket
+        description: Longitude rounded to 3 decimal places (~111 meters).
+      - name: crime_code
+        description: Numeric code representing the type of crime.
+      - name: crime_description
+        description: Description of the crime type.
+      - name: month
+        description: Month name (e.g., January, February).
+      - name: year
+        description: Year of the crime.
+      - name: month_number
+        description: Numeric month value (1-12) for ordering.
+      - name: time_of_day
+        description: Part of the day (e.g., Morning, Afternoon, Evening, Night).
+      - name: crime_count
+        description: Total number of crimes in the grid for that crime type in the given month.
+      - name: total_crimes_in_grid
+        description: Total number of crimes in that specific latitude/longitude grid.
+      - name: crime_density_percentage
+        description: Percentage of total crimes represented by this specific crime type in the grid.
