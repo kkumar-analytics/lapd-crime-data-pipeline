@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: fct_crime_events
+    description: "Fact table containing crime events with references to dimensions. One row per crime event (dr_no)."
+    columns:
+      - name: dr_no
+        description: "Primary business key representing the crime event."
+        tests:
+          - not_null
+          - unique
+
+      - name: date_rptd_id
+        description: "Foreign key to dim_date table representing the report date."
+
+      - name: date_occ_id
+        description: "Foreign key to dim_date table representing the occurrence date."
+
+      - name: time_occ_id
+        description: "Foreign key to dim_time table representing the occurrence time."
+
+      - name: crime_code_id_1
+        description: "Foreign key to dim_crime_code table for the primary crime code."
+
+      - name: crime_code_id_2
+        description: "Foreign key to dim_crime_code table for the secondary crime code."
+
+      - name: crime_code_id_3
+        description: "Foreign key to dim_crime_code table for the tertiary crime code."
+
+      - name: crime_code_id_4
+        description: "Foreign key to dim_crime_code table for the quaternary crime code."
+
+      - name: mocodes_dim_id
+        description: "Foreign key to dim_mocodes table representing modus operandi codes associated with the event."
+
+      - name: victims_id
+        description: "Foreign key to dim_victim table representing the victim information."
+
+      - name: weapons_id
+        description: "Foreign key to dim_weapon table representing the weapon information."
+
+      - name: status_dim_id
+        description: "Foreign key to dim_status table representing the status of the case."
+
+      - name: area_dim_id
+        description: "Foreign key to dim_area table representing the LAPD reporting area."
+
+      - name: premis_dim_id
+        description: "Foreign key to dim_premis table representing where the crime took place."
+
+      - name: location_dim_id
+        description: "Foreign key to dim_location table representing latitude, longitude of crime."
+
+      - name: doe
+        description: "Date of entry. First time this crime event was inserted into the fact table."
+
+      - name: dlu
+        description: "Date last updated. Reflects last time this crime event row was updated."
