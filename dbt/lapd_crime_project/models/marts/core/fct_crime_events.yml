@@ -1,59 +1,86 @@
 version: 2
 
 models:
-  - name: fct_crime_events
-    description: "Fact table containing crime events with references to dimensions. One row per crime event (dr_no)."
+  - name: fact_lapd_crime_events
+    description: Fact table capturing LAPD crime events joined to all related dimensions including date, time, victim, weapon, status, area, premise, and location.
     columns:
       - name: dr_no
-        description: "Primary business key representing the crime event."
+        description: Unique crime report identifier (primary key).
         tests:
-          - not_null
           - unique
-
-      - name: date_rptd_id
-        description: "Foreign key to dim_date table representing the report date."
+          - not_null
 
       - name: date_occ_id
-        description: "Foreign key to dim_date table representing the occurrence date."
+        description: Foreign key to the date the crime occurred.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: id
+
+      - name: date_rptd_id
+        description: Foreign key to the date the crime was reported.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: id
 
       - name: time_occ_id
-        description: "Foreign key to dim_time table representing the occurrence time."
-
-      - name: crime_code_id_1
-        description: "Foreign key to dim_crime_code table for the primary crime code."
-
-      - name: crime_code_id_2
-        description: "Foreign key to dim_crime_code table for the secondary crime code."
-
-      - name: crime_code_id_3
-        description: "Foreign key to dim_crime_code table for the tertiary crime code."
-
-      - name: crime_code_id_4
-        description: "Foreign key to dim_crime_code table for the quaternary crime code."
-
-      - name: mocodes_dim_id
-        description: "Foreign key to dim_mocodes table representing modus operandi codes associated with the event."
+        description: Foreign key to the time the crime occurred.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_time')
+              field: id
 
       - name: victims_id
-        description: "Foreign key to dim_victim table representing the victim information."
+        description: Foreign key to the victim dimension table.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_victim')
+              field: id
 
       - name: weapons_id
-        description: "Foreign key to dim_weapon table representing the weapon information."
+        description: Foreign key to the weapon used in the crime.
+        tests:
+          - relationships:
+              to: ref('dim_weapon')
+              field: id
 
       - name: status_dim_id
-        description: "Foreign key to dim_status table representing the status of the case."
+        description: Foreign key to the crime status dimension.
+        tests:
+          - relationships:
+              to: ref('dim_status')
+              field: id
 
       - name: area_dim_id
-        description: "Foreign key to dim_area table representing the LAPD reporting area."
+        description: Foreign key to the geographical area of the crime.
+        tests:
+          - relationships:
+              to: ref('dim_area')
+              field: id
 
       - name: premis_dim_id
-        description: "Foreign key to dim_premis table representing where the crime took place."
+        description: Foreign key to the premise (location type) where the crime occurred.
+        tests:
+          - relationships:
+              to: ref('dim_premise')
+              field: id
 
       - name: location_dim_id
-        description: "Foreign key to dim_location table representing latitude, longitude of crime."
+        description: Foreign key to the location dimension (lat/lon/cross street).
+        tests:
+          - relationships:
+              to: ref('dim_location')
+              field: id
 
       - name: doe
-        description: "Date of entry. First time this crime event was inserted into the fact table."
+        description: Date of entry into the fact table.
+        tests: []
 
       - name: dlu
-        description: "Date last updated. Reflects last time this crime event row was updated."
+        description: Date of last update in the fact table.
+        tests: []
