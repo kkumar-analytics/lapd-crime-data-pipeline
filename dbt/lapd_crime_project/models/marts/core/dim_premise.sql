@@ -13,10 +13,11 @@ WITH source_premise AS (
         premis_desc,
         dl_upd AS source_dlu
     FROM {{ ref('stg_lapd_crime_data') }}
-    WHERE premis_cd is not null and premis_desc is not null
-    {% if is_incremental() %}
-    WHERE dl_upd > (SELECT MAX(source_dlu) FROM {{ this }})
-    {% endif %}
+    WHERE premis_cd IS NOT NULL
+      AND premis_desc IS NOT NULL
+      {% if is_incremental() %}
+      AND dl_upd > (SELECT MAX(source_dlu) FROM {{ this }})
+      {% endif %}
 )
 
 SELECT
@@ -24,5 +25,5 @@ SELECT
     premis_cd AS code,
     premis_desc AS description,
     source_dlu,
-    CURRENT_TIMESTAMP AS dlu
+    CURRENT_TIMESTAMP() AS dlu
 FROM source_premise

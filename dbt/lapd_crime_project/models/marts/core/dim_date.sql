@@ -23,5 +23,5 @@ SELECT
     EXTRACT(week FROM date_day) AS week_of_year,
     EXTRACT(quarter FROM date_day) AS quarter,
     CASE WHEN EXTRACT(dow FROM date_day) IN (0, 6) THEN TRUE ELSE FALSE END AS is_weekend,
-    CURRENT_TIMESTAMP AS doe
+    CURRENT_TIMESTAMP() AS doe
 FROM date_
