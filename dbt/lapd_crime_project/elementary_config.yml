@@ -1,0 +1,11 @@
+profiles_dir: ~/.dbt
+target: dev
+
+slack_alerts:
+  webhook: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+  channel: "#data-quality-alerts"
+  notify_on:
+    - error  # only notify for errors; could also use: warn, error, schema_change
+  tags:
+    - critical
+  send_test_summary: true
