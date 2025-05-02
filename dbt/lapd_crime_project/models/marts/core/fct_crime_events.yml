@@ -1,19 +1,21 @@
 version: 2
 
 models:
-  - name: fact_lapd_crime_events
+  - name: fct_crime_events
     description: Fact table capturing LAPD crime events joined to all related dimensions including date, time, victim, weapon, status, area, premise, and location.
     columns:
       - name: dr_no
         description: Unique crime report identifier (primary key).
         tests:
-          - unique
-          - not_null
+          - dbt_expectations.expect_column_values_to_be_unique
+          - dbt_expectations.expect_column_values_to_not_be_null
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: '^\\d+$'
 
       - name: date_occ_id
         description: Foreign key to the date the crime occurred.
         tests:
-          - not_null
+          - dbt_expectations.expect_column_values_to_not_be_null
           - relationships:
               to: ref('dim_date')
               field: id
@@ -21,7 +23,7 @@ models:
       - name: date_rptd_id
         description: Foreign key to the date the crime was reported.
         tests:
-          - not_null
+          - dbt_expectations.expect_column_values_to_not_be_null
           - relationships:
               to: ref('dim_date')
               field: id
@@ -29,7 +31,7 @@ models:
       - name: time_occ_id
         description: Foreign key to the time the crime occurred.
         tests:
-          - not_null
+          - dbt_expectations.expect_column_values_to_not_be_null
           - relationships:
               to: ref('dim_time')
               field: id
@@ -37,7 +39,6 @@ models:
       - name: victims_id
         description: Foreign key to the victim dimension table.
         tests:
-          - not_null
           - relationships:
               to: ref('dim_victim')
               field: id
@@ -79,8 +80,17 @@ models:
 
       - name: doe
         description: Date of entry into the fact table.
-        tests: []
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
 
       - name: dlu
         description: Date of last update in the fact table.
-        tests: []
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
+
+    tests:
+      - elementary.schema_changes
+      - elementary.freshness_anomalies:
+          timestamp_column: "dlu"

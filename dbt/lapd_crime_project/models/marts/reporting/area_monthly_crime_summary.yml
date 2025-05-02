@@ -17,3 +17,7 @@ models:
         description: "The number of crimes reported in that area and month."
       - name: dlu
         description: "The timestamp when the summary row was last updated."
+
+    tests:
+      - elementary.volume_anomalies:
+           timestamp_column: "dlu"

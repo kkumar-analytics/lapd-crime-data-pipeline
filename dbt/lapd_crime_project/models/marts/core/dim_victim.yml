@@ -1,8 +1,9 @@
 version: 2
-
 models:
   - name: dim_victim
-    description: "Dimension table containing victim demographic attributes from LAPD crime dataset, managed as an SCD Type 2 table with incremental loads based on last update timestamp."
+    description: >
+      Dimension table containing victim demographic attributes from LAPD crime dataset,
+      managed as an SCD Type 2 table with incremental loads based on last update timestamp.
     config:
       materialized: incremental
       schema: mart_core
@@ -14,6 +15,8 @@ models:
           - unique
       - name: age
         description: "Age of the victim at the time of the incident."
+        tests:  # Add tests here, at the column level
+          - elementary.column_anomalies
       - name: sex
         description: "Sex of the victim (M/F/X/N/U)."
       - name: descent
