@@ -1,0 +1,6 @@
+dbt-core==1.9.4
+dbt-snowflake==1.9.2
+google-cloud-storage==2.19.0
+elementary-data==0.18.1
+pyarrow==18.1.0
+astronomer-cosmos[dbt.all]

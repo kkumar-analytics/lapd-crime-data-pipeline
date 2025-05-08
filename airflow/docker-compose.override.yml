@@ -1,0 +1,15 @@
+services:
+  scheduler:
+    volumes:
+      - ~/.dbt:/home/astro/.dbt:rw
+      - /Users/kuldeepkumar/lapd-crime-data-project/airflow/dbt:/usr/local/airflow/dbt:rw
+      - ~/.config/gcloud/application_default_credentials.json:/usr/local/airflow/adc.json:ro
+      - ~/.config/gcloud/dq_writer.json:/usr/local/airflow/dq_writer.json:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/adc.json
+      - GOOGLE_CLOUD_PROJECT=lapd-crime-data-project
+
+  triggerer:
+    volumes:
+      - ~/.dbt:/home/astro/.dbt:rw
+      - /Users/kuldeepkumar/lapd-crime-data-project/airflow/dbt:/usr/local/airflow/dbt:rw

@@ -22,8 +22,8 @@ models:
 
     # Adding Elementary models to the dbt_project.yml
   elementary:
-    +schema: elementary  # This schema will store the Elementary models
-    +enabled: true  # This ensures the Elementary models are run by dbt
+    +schema: elementary
+    +enabled: true
 
 seeds:
   lapd_crime_project:
